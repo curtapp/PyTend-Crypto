@@ -1,39 +1,9 @@
 from abc import ABC, abstractmethod
 
-
-class KeyOpts(ABC):
-    """ Key options interface
-     """
-
-    @property
-    @abstractmethod
-    def algorithm(self) -> str:
-        """ String ID of key algorithm
-        """
-
-    @property
-    @abstractmethod
-    def ephemeral(self) -> bool:
-        """ True if key is ephemeral
-        """
+from .opts import KeyOpts
 
 
-class KeyDerivOpts(KeyOpts, ABC):
-    """ Derive key options interface
-    """
-
-
-class KeyGenOpts(KeyOpts, ABC):
-    """ Generate key options interface
-    """
-
-
-class KeyImportOpts(KeyOpts, ABC):
-    """ Import key options interface
-    """
-
-
-class Key:
+class Key(ABC):
     """ Key interface
     """
 

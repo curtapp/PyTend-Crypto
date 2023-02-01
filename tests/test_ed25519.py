@@ -3,7 +3,7 @@ import base64
 import pytest
 
 from tend.crypto import ed25519, sha256
-from tend.crypto.csp import Provider as CSProvider
+from tend.crypto.csp import CSProvider
 
 
 @pytest.fixture

@@ -4,35 +4,35 @@ from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey, Ed25519PublicKey
 
 from tend.crypto import sha256
-from tend.crypto.csp import keys, SignerOpts, HashOpts
+from tend.crypto.csp import keys, opts
 
 ALGORITHM = 'ED25519'
 
 
 @dataclass
-class KeyGenOpts(keys.KeyGenOpts):
+class KeyGenOpts(opts.KeyGenOpts):
     algorithm = ALGORITHM
     ephemeral = False
 
 
 @dataclass
-class KeyDerivOpts(keys.KeyDerivOpts):
+class KeyDerivOpts(opts.KeyDerivOpts):
     algorithm = ALGORITHM
     ephemeral = False
 
 
 @dataclass
-class KeyImportOpts(keys.KeyImportOpts):
+class KeyImportOpts(opts.KeyImportOpts):
     private: bool = True
     algorithm = ALGORITHM
     ephemeral = False
 
 
 @dataclass
-class Sha256SignerOpts(SignerOpts):
+class Sha256SignerOpts(opts.SignerOpts):
 
     @property
-    def hash_options(self) -> HashOpts:
+    def hash_options(self) -> opts.HashOpts:
         return sha256.HashOpts()
 
 

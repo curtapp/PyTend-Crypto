@@ -1,13 +1,13 @@
 import hashlib
 from dataclasses import dataclass
 
-from tend.crypto.csp import hash
+from tend.crypto.csp import opts, hash
 
 ALGORITHM = 'SHA256'
 
 
 @dataclass
-class HashOpts(hash.HashOpts):
+class HashOpts(opts.HashOpts):
     algorithm = ALGORITHM
 
 
@@ -15,8 +15,9 @@ class Hash(hash.Hasher):
     """ SHA256 Hasher
     """
 
-    def __init__(self):
+    def __init__(self, *args):
         self._hasher = hashlib.new('sha256')
+        super().__init__(HashOpts())
 
     @property
     def size(self) -> int:

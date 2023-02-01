@@ -1,28 +1,7 @@
 from tend.crypto import ed25519, sha256
-
-from .hash import *
-from .keys import *
-
-
-class SignerOpts(ABC):
-    """ Signer options interface
-    """
-
-    @property
-    @abstractmethod
-    def hash_options(self) -> HashOpts:
-        """ Returns hash options of signer
-        """
-
-
-class EncrypterOpts(ABC):
-    """ Encrypter options interface
-    """
-
-
-class DecrypterOpts(ABC):
-    """ Decrypter options interface
-    """
+from .hash import HashFunc, Hasher
+from .keys import Key
+from .opts import KeyOpts, KeyGenOpts, KeyImportOpts, KeyDerivOpts, HashOpts, SignerOpts, EncrypterOpts, DecrypterOpts
 
 
 class KeyStore:
@@ -50,7 +29,7 @@ class KeyStore:
         self._keys[key.ski] = key
 
 
-class Provider:
+class CSProvider:
     """ Crypto service provider
     """
 
@@ -135,4 +114,3 @@ class Provider:
     def decrypt(self, key: Key, ciphertext: bytes, opts: DecrypterOpts) -> bytes:
         """ Decrypt decrypts ciphertext using `key`  and `opts` """
         raise NotImplementedError(f'`decrypt` with option {opts.__class__.__qualname__} not yet implemented')
-
