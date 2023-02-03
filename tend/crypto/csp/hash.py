@@ -46,12 +46,28 @@ class Hasher(ABC):
         """ Returns current hash with prefix if present. It does not reset hasher.
         """
 
-    @classmethod
-    def digest(cls,  block: bytes, opts: HashOpts = None, prefix: bytes = None, ) -> bytes:
-        """ Sends data block to hash.
+
+class BlockHasher(Hasher):
+    """ Block hasher interface
+    """
+
+    def write(self, block: bytes) -> int:
+        raise RuntimeError('Not applicable block hasher')
+
+    @abstractmethod
+    def write_data(self, block: bytes) -> bytes:
+        """ Sends tx data to hash to build block hash.
+
+        Returns:
+            Digest (Hash of TX)
         """
-        hasher = cls(opts)
-        hasher.write(block)
-        return hasher.sum(prefix)
 
+    @abstractmethod
+    def write_hash(self, block: bytes):
+        """ Sends ready tx data hash to build block hash.
+        """
 
+    @abstractmethod
+    def sum(self, prefix: bytes = None) -> bytes:
+        """ Returns current block hash with prefix if present.  It does not reset hasher.
+        """
