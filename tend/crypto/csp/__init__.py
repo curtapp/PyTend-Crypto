@@ -60,6 +60,8 @@ class CSProvider:
         else:
             if isinstance(raw, ed25519.Ed25519PrivateKey):
                 return ed25519.Key(raw, ed25519.KeyImportOpts())
+            if isinstance(raw, ed25519.Ed25519PublicKey):
+                return ed25519.Key(raw, ed25519.KeyImportOpts(private=False))
             raise NotImplementedError(f'`key_import` from {raw.__class__.__qualname__} not yet implemented')
 
     def get_key(self, ski: bytes | str) -> Key:
