@@ -33,12 +33,3 @@ class MerkleTree(BlockHasher):
     def sum(self, prefix: bytes = None) -> bytes:
         """ Returns root digest
         """
-
-    def reset(self):
-        """ Clears hasher state """
-        self._root_hasher = self._hasher_factory()
-
-    def clear(self):
-        """ Clears tree state """
-        self._leafs.clear()
-        self.reset()
